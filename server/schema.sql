@@ -2,21 +2,21 @@ CREATE DATABASE chat;
 
 USE chat;
 
-CREATE TABLE messages (
-  message_id int(11) not null AUTO_INCREMENT,
-  message varchar(45) default null,
-  created DATE default null,
-  PRIMARY KEY (message_id),
-  FOREIGN KEY (user_id) references users(user_id),
-  FOREIGN KEY (room_id) references rooms(room_id)
+create table users (
+  user_id int(11) not null AUTO_INCREMENT,
+  username varchar(45) default null,
+  PRIMARY KEY (user_id)
 );
 
-/* Create other tables and define schemas for them here! */
+CREATE TABLE messages (
+  table_id int NOT NULL AUTO_INCREMENT,
+  messages varchar(45) default null,
+  roomname varchar(45) default null,
+  user_id int(11) not null,
+  PRIMARY KEY (table_id),
+  KEY fk_user (user_id),
 
-
-
-
-/*  Execute this file from the command line by typing:
- *    mysql -u root < server/schema.sql
- *  to create the database and the tables.*/
-
+  foreign key (user_id)
+  references users (user_id)
+  on update cascade
+);
